@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function App() {
-  const [submitted, setSubmitted] = useState(false);
+export default function App() 
 
   const services = [
     {
@@ -314,13 +313,18 @@ export default function App() {
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-xl">
-              {submitted ? (
-                <div className="rounded-3xl bg-emerald-50 p-8 text-center">
-                  <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-emerald-500 text-2xl font-black text-white">✓</div>
-                  <h3 className="mt-5 text-2xl font-black">Audit request received.</h3>
-                  <p className="mt-3 text-slate-600">Thanks. We’ll review your store and follow up with your audit notes shortly.</p>
-                </div>
+            <div className="rounded-[2rem] border border-slate-200 bg-white p-3 shadow-xl sm:p-6">
+  <iframe
+    src="https://tally.so/r/oblMgX?alignLeft=1&hideTitle=1&transparentBackground=1"
+    width="100%"
+    height="820"
+    frameBorder="0"
+    marginHeight="0"
+    marginWidth="0"
+    title="Request Your Free Store Audit"
+    className="rounded-3xl"
+  />
+</div>
               ) : (
                 <form
                   className="grid gap-4"
