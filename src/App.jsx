@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function App() 
+export default function AithenticGrowthSystemsLanding() {
 
   const services = [
     {
@@ -263,7 +263,7 @@ export default function App()
               <p className="mt-5 text-lg leading-8 text-white/65">Examples of the systems and improvements we create for e-commerce brands.</p>
             </div>
             <div className="mt-14 grid gap-5 lg:grid-cols-3">
-              {["Product Page Before & After", "AI Chatbot Conversation Flow", "Store Growth Audit Preview"].map((title) => (
+              {["Product Page Before & After", "AI Chatbot Conversation Flow", "Store Growth Audit Preview"].map((title, i) => (
                 <div key={title} className="overflow-hidden rounded-3xl border border-white/10 bg-[#0D141B]">
                   <div className="h-52 bg-gradient-to-br from-white/10 to-emerald-400/10 p-5">
                     <div className="h-full rounded-2xl border border-white/10 bg-[#080D12]/70 p-4">
@@ -314,55 +314,16 @@ export default function App()
             </div>
 
             <div className="rounded-[2rem] border border-slate-200 bg-white p-3 shadow-xl sm:p-6">
-  <iframe
-    src="https://tally.so/r/oblMgX?alignLeft=1&hideTitle=1&transparentBackground=1"
-    width="100%"
-    height="820"
-    frameBorder="0"
-    marginHeight="0"
-    marginWidth="0"
-    title="Request Your Free Store Audit"
-    className="rounded-3xl"
-  />
-</div>
-              ) : (
-                <form
-                  className="grid gap-4"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSubmitted(true);
-                  }}
-                >
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="grid gap-2 text-sm font-bold">Name<input required className="rounded-2xl border border-slate-200 px-4 py-3 font-normal outline-none transition focus:border-emerald-500" /></label>
-                    <label className="grid gap-2 text-sm font-bold">Email<input required type="email" className="rounded-2xl border border-slate-200 px-4 py-3 font-normal outline-none transition focus:border-emerald-500" /></label>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="grid gap-2 text-sm font-bold">Brand name<input required className="rounded-2xl border border-slate-200 px-4 py-3 font-normal outline-none transition focus:border-emerald-500" /></label>
-                    <label className="grid gap-2 text-sm font-bold">Website URL<input required type="url" placeholder="https://" className="rounded-2xl border border-slate-200 px-4 py-3 font-normal outline-none transition focus:border-emerald-500" /></label>
-                  </div>
-                  <label className="grid gap-2 text-sm font-bold">What platform do you use?
-                    <select className="rounded-2xl border border-slate-200 px-4 py-3 font-normal outline-none transition focus:border-emerald-500">
-                      <option>Shopify</option>
-                      <option>WooCommerce</option>
-                      <option>Wix</option>
-                      <option>Squarespace</option>
-                      <option>Other</option>
-                    </select>
-                  </label>
-                  <label className="grid gap-2 text-sm font-bold">What do you want help with most?
-                    <select className="rounded-2xl border border-slate-200 px-4 py-3 font-normal outline-none transition focus:border-emerald-500">
-                      <option>Product pages</option>
-                      <option>AI chatbot</option>
-                      <option>Customer support</option>
-                      <option>Email follow-up</option>
-                      <option>Full store growth system</option>
-                    </select>
-                  </label>
-                  <label className="grid gap-2 text-sm font-bold">Message / Notes<textarea rows={5} className="rounded-2xl border border-slate-200 px-4 py-3 font-normal outline-none transition focus:border-emerald-500" /></label>
-                  <button className="rounded-full bg-[#071014] px-6 py-4 font-black text-white transition hover:-translate-y-1 hover:bg-emerald-700">Submit Audit Request</button>
-                </form>
-              )}
+              <iframe
+                src="https://tally.so/embed/oblMgX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                width="100%"
+                height="860"
+                frameBorder="0"
+                marginHeight="0"
+                marginWidth="0"
+                title="Request Your Free Store Audit"
+                className="rounded-3xl"
+              />
             </div>
           </div>
         </section>
