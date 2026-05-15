@@ -1,13 +1,349 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aithentic Growth Systems | AI Growth Systems for Shopify Brands</title>
-    <meta name="description" content="AI-powered growth systems for Shopify and e-commerce brands. Product page optimization, AI chatbot setup, support flow, and follow-up recommendations." />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aithentic Growth Systems | AI Front Office Systems</title>
+  <meta name="description" content="AI Front Office Systems for home service businesses. Capture more leads, book more jobs, reduce admin work, and follow up automatically." />
+  <style>
+    :root {
+      --bg: #050706;
+      --bg-soft: #0b0f0d;
+      --card: #0f1612;
+      --card-2: #111b16;
+      --line: rgba(112, 255, 80, 0.18);
+      --line-soft: rgba(255,255,255,0.08);
+      --text: #f4fff7;
+      --muted: #a8b8ad;
+      --muted-2: #6f8176;
+      --green: #7CFF4D;
+      --green-2: #3DFF7B;
+      --white: #ffffff;
+      --shadow: 0 24px 80px rgba(124, 255, 77, 0.12);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(124,255,77,0.14), transparent 34%),
+        radial-gradient(circle at 82% 18%, rgba(61,255,123,0.10), transparent 28%),
+        linear-gradient(180deg, #020302 0%, #050706 45%, #030403 100%);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .noise {
+      position: fixed; inset: 0; opacity: 0.035; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+    }
+    .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; position: relative; z-index: 1; }
+    .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(18px); background: rgba(5, 7, 6, 0.76); border-bottom: 1px solid var(--line-soft); }
+    .nav-inner { height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 14px; min-width: 240px; }
+    .brand img { width: 54px; height: 54px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 24px rgba(124,255,77,0.20); border: 1px solid rgba(124,255,77,0.20); background: #000; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-text strong { font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .brand-text span { font-size: 0.76rem; color: var(--green); letter-spacing: 0.20em; text-transform: uppercase; margin-top: 5px; }
+    .nav-links { display: flex; align-items: center; gap: 24px; color: var(--muted); font-size: 0.92rem; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta { padding: 11px 18px; border-radius: 999px; background: rgba(124,255,77,0.10); border: 1px solid rgba(124,255,77,0.30); color: var(--green); font-weight: 700; box-shadow: 0 0 28px rgba(124,255,77,0.10); }
+    .hero { padding: 96px 0 74px; position: relative; }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 52px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--green); background: rgba(124,255,77,0.08); border: 1px solid rgba(124,255,77,0.22); padding: 8px 13px; border-radius: 999px; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; margin-bottom: 24px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 18px var(--green); }
+    h1 { font-size: clamp(3.1rem, 7vw, 6.65rem); line-height: 0.92; letter-spacing: -0.07em; margin-bottom: 26px; max-width: 850px; }
+    .gradient-text { background: linear-gradient(90deg, var(--white) 0%, #d9ffe0 46%, var(--green) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { color: var(--muted); font-size: clamp(1.05rem, 1.4vw, 1.22rem); max-width: 680px; margin-bottom: 34px; }
+    .hero-copy strong { color: var(--text); font-weight: 800; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-bottom: 34px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 14px 20px; border-radius: 999px; font-weight: 850; transition: transform .18s ease, border-color .18s ease, background .18s ease; border: 1px solid transparent; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(135deg, var(--green), var(--green-2)); color: #061006; box-shadow: 0 18px 50px rgba(124,255,77,0.18); }
+    .btn-secondary { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: var(--text); }
+    .mini-proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 720px; }
+    .mini-card { padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.035); border: 1px solid var(--line-soft); }
+    .mini-card strong { display: block; color: var(--green); font-size: 1.28rem; line-height: 1; margin-bottom: 7px; }
+    .mini-card span { color: var(--muted); font-size: 0.88rem; }
+    .hero-visual { position: relative; }
+    .screen { position: relative; padding: 20px; border-radius: 34px; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)); border: 1px solid rgba(124,255,77,0.22); box-shadow: var(--shadow); overflow: hidden; }
+    .screen::before { content: ""; position: absolute; width: 360px; height: 360px; background: radial-gradient(circle, rgba(124,255,77,0.14), transparent 64%); top: -140px; right: -120px; pointer-events: none; }
+    .screen-top { display: flex; align-items: center; justify-content: space-between; padding: 12px 12px 22px; position: relative; z-index: 1; }
+    .window-dots { display: flex; gap: 8px; }
+    .window-dots span { width: 11px; height: 11px; border-radius: 50%; background: rgba(255,255,255,0.20); }
+    .status-pill { color: var(--green); font-weight: 800; font-size: 0.78rem; border: 1px solid rgba(124,255,77,0.28); background: rgba(124,255,77,0.08); border-radius: 999px; padding: 7px 11px; }
+    .assistant-card { background: rgba(0,0,0,0.24); border: 1px solid var(--line-soft); border-radius: 26px; padding: 22px; position: relative; z-index: 1; }
+    .assistant-head { display: flex; gap: 14px; align-items: center; margin-bottom: 20px; }
+    .avatar { width: 54px; height: 54px; border-radius: 18px; background: linear-gradient(135deg, rgba(124,255,77,0.25), rgba(61,255,123,0.08)); border: 1px solid rgba(124,255,77,0.25); display: grid; place-items: center; color: var(--green); font-weight: 950; letter-spacing: -0.04em; }
+    .assistant-head h3 { font-size: 1.05rem; }
+    .assistant-head p { color: var(--muted); font-size: 0.88rem; }
+    .message { border-radius: 18px; padding: 15px 16px; margin-bottom: 12px; font-size: 0.94rem; }
+    .message.bot { background: rgba(124,255,77,0.08); border: 1px solid rgba(124,255,77,0.20); }
+    .message.user { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); color: var(--muted); margin-left: 32px; }
+    .lead-capture { margin-top: 18px; display: grid; gap: 10px; }
+    .field { display: flex; justify-content: space-between; align-items: center; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 12px 14px; border-radius: 14px; font-size: 0.88rem; }
+    .field span:last-child { color: var(--green); font-weight: 800; }
+    .section { padding: 74px 0; }
+    .section-head { max-width: 760px; margin-bottom: 34px; }
+    .section-kicker { color: var(--green); font-weight: 850; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.8rem; margin-bottom: 12px; }
+    h2 { font-size: clamp(2.1rem, 4vw, 3.75rem); line-height: 1.02; letter-spacing: -0.055em; margin-bottom: 16px; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.028)); border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 24px; position: relative; overflow: hidden; }
+    .card::after { content: ""; position: absolute; inset: auto -40% -60% -40%; height: 150px; background: radial-gradient(circle, rgba(124,255,77,0.07), transparent 62%); pointer-events: none; }
+    .icon { width: 42px; height: 42px; border-radius: 14px; background: rgba(124,255,77,0.10); border: 1px solid rgba(124,255,77,0.22); display: grid; place-items: center; color: var(--green); font-weight: 950; margin-bottom: 18px; }
+    .card h3 { font-size: 1.12rem; margin-bottom: 9px; letter-spacing: -0.025em; }
+    .card p { color: var(--muted); font-size: 0.95rem; position: relative; z-index: 1; }
+    .systems { background: rgba(255,255,255,0.025); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+    .system-card { min-height: 290px; display: flex; flex-direction: column; }
+    .system-card.featured { border-color: rgba(124,255,77,0.42); box-shadow: var(--shadow); background: linear-gradient(180deg, rgba(124,255,77,0.105), rgba(255,255,255,0.026)); }
+    .tag { align-self: flex-start; font-size: 0.74rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: #061006; background: var(--green); border-radius: 999px; padding: 7px 10px; margin-bottom: 18px; }
+    .system-card ul { list-style: none; display: grid; gap: 12px; margin-top: 18px; color: var(--muted); font-size: 0.94rem; }
+    .system-card li { display: flex; gap: 10px; align-items: flex-start; }
+    .check { color: var(--green); font-weight: 950; flex: 0 0 auto; }
+    .process { counter-reset: step; }
+    .step-card { counter-increment: step; }
+    .step-number { font-size: 0.82rem; color: var(--green); font-weight: 950; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px; }
+    .step-number::before { content: "0" counter(step) " / "; color: var(--muted-2); }
+    .niche-wrap { display: flex; flex-wrap: wrap; gap: 12px; }
+    .niche { padding: 12px 14px; border-radius: 999px; background: rgba(255,255,255,0.045); border: 1px solid rgba(255,255,255,0.09); color: var(--muted); font-weight: 700; }
+    .niche.primary { color: var(--green); border-color: rgba(124,255,77,0.28); background: rgba(124,255,77,0.08); }
+    .cta-panel { border: 1px solid rgba(124,255,77,0.25); background: radial-gradient(circle at 20% 10%, rgba(124,255,77,0.14), transparent 30%), linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025)); border-radius: 34px; padding: clamp(28px, 6vw, 58px); display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; box-shadow: var(--shadow); }
+    .cta-panel p { color: var(--muted); max-width: 690px; margin-top: 12px; font-size: 1.04rem; }
+    .footer { border-top: 1px solid var(--line-soft); padding: 30px 0; color: var(--muted-2); font-size: 0.92rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    @media (max-width: 920px) {
+      .hero-grid, .grid-4, .grid-3, .cta-panel { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding-top: 70px; }
+      .mini-proof { grid-template-columns: 1fr; }
+      .cta-panel { text-align: left; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .brand-text strong { font-size: 0.78rem; }
+      .brand-text span { font-size: 0.64rem; }
+      .hero-actions { align-items: stretch; }
+      .btn { width: 100%; }
+      h1 { font-size: 3.2rem; }
+      .section { padding: 56px 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise"></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Aithentic Growth Systems home">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAB3AJgDASIAAhEBAxEB/8QAHwABAAICAgMBAQAAAAAAAAAAAAoLBwgFCQEEBgMC/8QASBAAAQQCAgEBBQMHBgsJAQAABAIDBQYBBwAICREKEhMUIRUxQRYXGBkiUfAaYXGBmNYlN0JXWYiWwdHV4SMmKDhYYpGhp7H/xAAcAQEAAQUBAQAAAAAAAAAAAAAAAwECBAUGBwj/xAAvEQACAgICAQMCBAUFAAAAAAACAwEEAAUGERIHEzEUIQhBUaEVFhfB8GFxgZGx/9oADAMBAAIRAxEAPwDv+8//AJnK94m+s7AWv34aw9wd6BzEHoionYHPGpwA7ORZ7dlwi3PfberdOffHGr0SajLdxuT4UWlgqCi7cTE1FV4u9w2XcrVsPYNmm7perxYJa13C3WSRJl7BZbJPHPyUzNzMmY46UfJSR5L5ZZT7i3HnnVrVn1zzbfyL969seR7t5tvtbts0pJ95m3xKPUlmKKjNZ6uiCCWKFriCxhDI7YFahnEYPKHGFVYLIXO2qQaVMT0i+9o/xjHHHHGMccccYxxxxxjHHHH8fx/14xjjjjjGOOOOMY4/j+P4+nHHGMcsK/ZUvOtI3TFR8W/ba25LsEVEqjenm0rEfjJUzDwomFo68WORKX75ElDRQ7xOojSnFKLhgSde4eSTHUiNkK9TnNVqyWCm2KAt9Tm5StWqqzUXY61YoM4mMmoCfgzmJOGmoiSDcZLj5SLkRRjgDhXWiBC2Gn2XEONpVhjL9Msf4yPVOP8AtEYzlP8A7sfinP8AT/k/uz+OMZzxzpo8EflGiPKf0Vpuz5+RjU9idWZB1d2YromBRHWtgxce2oC/BxQ6WUh1vasM23bIvA4rMWBNqtNTjnCc1Mp3jkgtII6jqY/Lvv7f9TGWyMTPf3ymp4445Hl2P+v4/wAf9eOOOMY4444xjjjjjGOOOOMY4444xjjjjjGOOOOMY4444xnfr7OB5HVePDyQ66fuVh+x+vvZRQGhd4pMJyxCxA9kkmsa72Kf8RWBRc6+vTscRJTL6VLjaNNXllnKPtBzOXOgrjjGOOOOMY5Ii9n18Jkj5YN32e0bbZs9c6eaeDOF2Rba+QiJl7dfZaIdTVNc02Xfw4geXEWYPcbJItgSo0TBxg0ZIDjFWyEfz1H9H+mu4+/fZ3VvVrRsSk+67KnWw35QvGUQlOrAacmWm8WUjGcfLwFUhGTJc/DWVmm4HbjIocyWNBDIt+dd1bpJ4KfHpXK9PWcLVvXnRUVEi2a6zDB0jY7ze7ZKiBSlmMjwUyMxP2+9WqRUbmLimSW40RxEfFiAVuEHZBYypR8mPj5254z+2+xOsW1hCSWIUpU7rS74EcGidmavlii01S6xCle81n5tkZ+OmwmXn/sayR0xDOPOuAZdc0C5b4ed7xVULy79J2bTqluBk+xmrq0VsvrHfo58N0W5xstHCy0jrh+abz8AmsbIihgXIUpZOBI2ysQcv8VAGZRsuoosVdnqjYJyp2iHka/ZqzMSVfsMDLiPAS0LOQ5j0dKxMkCQhsgOQjzh3xCxX20PMENONOJStOcYYzYDqP0+7D95t21rr51k1zLbJ2ZZkkktRwKmAouFhwG/iydjtM/IODQ1Zrsa3lOCpiZMDD+ZeEj2XHZA4IQiwE6Zexj9S6RW67O929xbE3lsRK2jp+l6vl8621K3hSf2oP59EcvY80wyrPouaBsNPIJUlKm48Nv3kr3d9lw8ctU6XePGqdirfAIjt8dvIIDbF0nJpuPTIVrVT/zB2rqmEUhvBMZDv1Z0K8TIJb+CkzlgIalG2lRIoocc/wAv/tXnaK8bs2HpLxz24DTOgaadI01vc4UJFTG0dqSQBBAE1a67KzDUlHUinkuoUzUMQ8ei1PhtYspc7HkygsFX2Mk8fyU7wj+np+i7bvez+H6RXYX0/pxn85v0+/GPTOM5x+OcfX08fyU7wj+v/let39onsLn1/wD0z6f1/T7vryto/XKeWP8ADyPd0cf0ditof3k4/XKeWT/SPd0v7Re0P7ycYyyYz7Kd4R/w6vW3Of3fpFdhfTGf3ev5y/r/AL/386jvMv4p/Z+vE71Pltuz3Vyw2Xct5WfUOvusXex/YhL1xvOBEuvSsolnZS3RabTByGJm0yK/gtLb+RghiEzE7Ftuw1/1yfljx93ke7pY/wBYraH94+ao7+7T9lO1dghrX2X3xtnfVlrsSqCgZ3bV8sd8lIaGWW8euLizLHISDwIKzSHynBhlNtLIdW6tKl59eMZ3J+DfwM7P8uttsd+slmM0/wBTNbT6K/eNjxwwp9otNqwKBKv691yBIfGFxLixEiEdL2OYZJioIY0HHycwcT8iicNRfZLPDHVKvGwNk03tTZsyCkj5263DfO0YmwzCnynn21Hg69sFIqLGA0OoBGTFVoDORB2FGKLOySa/uB7P3RKfrfw4dHA6OEA2PO6cRfZpyNDyMuTuFzmpqzWZ831bbcLkETMgXHPFu+/8TATaGVqFbHxith7ZeeLy77d7A7Mt0r227GddyM2maimdJauvtz1NWNZCxcqaOxTc1OEIgHftav8A7cZKylhCctB5Yy1TRK320tMsZYGZ9lO8I/4dXrd+H39iewv9eP8AGZ/9/wDH6P5Kd4Rv/S9b/wC0T2F/3bM//nK2f9cp5Y8/f5Hu6Wf9YraH94+P1ynlj/0j3dL+0VtD+8fGMsTNyezX+z/df9V33dW39FTNH1prOtSttudpmeyPYMcCIhIgZZL72fXZmXCCnspSKCAOh0yRPfGABYfMJYZXWJ9sbd17u/YTZs/1U1OZpXr09YihNVUKWs1ot9gCqYGflI6Us85brHapN+xzjbX2tLijy70VHFFKj4xPyoyHnsm7k8knkC7EUOT1dvfuj2b29reafAJmKLsTdF9tlUlX4stqQjXZGCmJsqONUCewwaJ8yO5hgthkhvCXWm1p0o4xjjjjjGP4/j+P6eewGGVIFigAjvFmmkMiCCjNLeIJJIcS0wwwy3hTjrzzq0tttoSpa1qwlOM5zjHPX5NE9lC8NDHY3ZzfkY7F1JZek9J2hAnXysz0cUgDY+5oAkYx6/fCJbbGmKhq0lLLACkJLjZW/rWOp5JFIlQH2MkiezdeHcDxndXH9572hAo7tv2DgRLBsB6WbYaJ07rL4bUrX9UoNedW2Ec2htqzbEfaUIhywOjQZWCxqfHnvw2vaUfMm95I+zP5lNKWQ1fT/rdPTcNTnI6WIzCbm2Gw67ETu4DBApB6GloRplkmJ1SWQO8cBVpCYl2ngXbpJxYsj32sPzKu9edZveODrlb343d+4oEKT7CWqtyjjElrTTk0y+4Nr8c+LOYMiLhtFhI7suOR6OC6xJfbeCdZvcXIBQE+l/TPcHendQWk9OCBYmVwc1ZZywzS3WK7V4KGFytcnOFModeaZNk3o2DCQw08+9JywaMNfB+M61p+Q8g0nFNJteS8k2dPTaHSUX7LbbS+0UVKNKquWOe5k/kIx0IjBMacitQGwxEsa3brUKr7t1661WsonPe0oFalhHZEU/tEREkRTAjElMRM3T2SzzN4s0OL4vOylxcdskG2VI9QrTPPYXmVrAce4dYdFuEtAtYQ/WWQDbZRCJg8p82MNnqqOSMxBVKHIw57Wh4am6pYHfKH1zqhOYG1ykdFdtKnAge+NBT7rTQUFu9oYRrOBY2wfBHgL+77qWmrB9i2J34pFgnjGISisba6w7tZdZesGsN16M2IIcCYOtyNsdLv9EnWjY6QDfT+0wdEzEcOaES3lbS8tMvtKcZWlSrcrw8eR/Tvmq6AntbOiavN7OjKq5pXuHqCSTHvgyUjOV8iKOsiK+2pLjWv9uQ32hKRGFDMiByCbLUxCDHqsSY5sq1mvcr17dR6bNS0lVmtZQwXIsV3gLUvS1ckDUtWQsWwJITAhIZmJicnAwYAMWYmtgiYGBQQGBRBCYlEzBCQzEiUTMTExMT1mUNhTknH+CO8z2jjXzpyK8WNnK1gbSsYni1zMX1ZP/JbNfQKg77TLaNHCQEwy0WsghDbXuPLypGaY5zK1OLU5nOXFLVlec/fleVZyrOf5/e9fX+flpl49rLOeJLuZZvCT2gkn7H1B7IkX68eM7ZlvIbJjTKpYyzpG4dXLO840QlcwM9LSgoj01Ii4l7CtLIACMbKqsKFEN8yfs8fbToVu+63DROp7/vTp/bLJIymtrtQIaVv1ioMScpkxun7Zi67DfOV6QiCC3YuKsboOK9ZghhCWDx5l8+Dj5v8/wA6y7I/2qNVbB3jsil6i1VWJG57E2FYI+sVGsRSWsmy0xJPYZHZS4Q4wIIO3jKiDpA4gaPjQWSZCRKFBGIIatNvGH7Oz47upPWOBp/ayhaE7Ydg7SSzbtm3nYUZWLDC1edMjQRl0DWbZ6WyxqRXfllttyMllyVs0uRKWApuJDMja3A1SyhZSNLdaWOeCcI86w82pogYoZ9lam3mXE5Sh1l1taVNuIVhK0KSpKsYzjOObEdW7HqCJ33rcjtFDW62aFfnMRuyI6AnrFDTQUHKDPx2LDHFwhQ8i8/WCyRrAqNHXlcuxGuxScYWYlSdbuNgep1O02q9dsduet19y+Gp1Ck2NtsyqV2WIoaxFmxUru2FuV/T01OtV1MsMWDHqEpMYbDpr13vhLrEpSxsV64idh8rCThSAM1gTmdeCxJgCRzESQxPcW+2fEP4avr69Iemefv+6i0r7vw9P2/T1/n/AKuY33Z4HPEzvzSuzdZVDqT1/wBcS9zqcvXofaWqKdXoq6a/nihvfh7NXpiPS5hiWhpBIhyRScPBSI6HI+SFKjzCR3YO6on2Z30V7mxNt5z73rj3n+1X1xnOfROPSFx+z6Z9P2v2sJwn1V73v5zsz4tvJ/0r8aXkcrev+sm97DbPHx3ABgqhtqsXqMuMcjQO5gDR4WmbTVZtkQcXJvVU1s10KxqalMiBRMpLSU+pxmr1dsfxH06/EBW9Q+SL41/SH164Ox1S1ZVufUL0y2HHOOkyoAtKmzbhcvoq23q9w6sXBrosEoq4WJtNrIfzGn5aO4uxSnjvK9XJLYwbO30rKlOZXET7c2Ba4QYYyUrhkAJeEhBe4QAXaD4JfJbF+Oe07I8JXkuuURprZvW7Y1lhOv8AtG6FM17W10o9hlGJuGqrNmlWY5ALU6/Nk3jW87P/ACgU/VLMJCrJj5SMjo+RkabP8WXi37H3KX3Dsrp/1n2XdLoR9qT17dqMC/IWk1xlpGZWUlIhwduYNebaa+LIkqIJf93CnH1euVZ6BPa5vGXTN99WRvIZTTqxWdu9YoeOib2ZLywMIxsvTUzOtjR0GKdJHCRxdsqtkn1SVRBRnMrZh5eUrUSiTmSK5FPVusPtPbdej2Yqv7G2NBxTGXFMRsPb7NGR7Knl5cdUyGFIMjN5dcVlxzKG05WvOVKzlWc559AZ1uXImfB/4fFZ9c9Bus/ven19Kix6Yz6fuwdjGc/j+Of5/u54x4PfD2nH06DdaM4z9PrUms59P58qO/f+PrjOP6uU5/57d6f53ds/7fXD/m3H57t6/wCd3bP+31w/5txjLRjvl7Kn41+z2srDjrXQheom9ENPyFSvWvpCwStBOk2mF4YhLprqXmzoV2uGryhDxNRzWp0Aj4JzJhw7JcRJVe/YvQGzuq+8dn9eNywKq1s3UdulKbbon47RTDUjGuY9woA1hShz4uSEcGkos8damDY4sYppWUOp5Yl+xu7G7o3zrf2RZ3rPbEtfW+BttMG67zexi7BKqasb+LUvaUPRpywOPuF1IV9NeeMAjyCIqKspEmllAppkmhyO/wC1+ROu43y6nFUsYMeyzfXXUUptRQYjA2S7qgm2RUeWe4yw0o2QzRIynCuFEOlEYEECFy8lgZhhljItfHHHGM2u6R6U1H2A7N6r1pv3d9P67aSk7AOftba1ylVRI8BRIlST7ENX3ERE581dJoBl2HqAb0WQA5PmhOyyxYhk8tizP3r57vEn4++hR9Z6Ubu1BtSy6d1rHa8666F147MH4kZ9gDMXWVTyxwBfla8CQlyw3afPkBjD22T1NmFWOWBaMqgufeUbV+wNltXJ+h1SWs7OvaXLbEursY0hxuuUqDIBElLDIrccbS2EIVJx4+cIy4Q6+Wy0wy6tXphjOU3VuXZPYjbOwt4bgtJ902dtK1zFzutnkvhJJlZ2bLcLLdSwM2wGEGzleBo+NAGGj4wBkaPjxhghmGG5oPiV3D4wPH51tAr0z220lIby2U1GWndNiYkiFKbmMCqVHUaNMSG8p6ApSCiQBn23Usysk7JziRxcSKBB4bNG667l2RM0Sv06lPSUrs2rzt1obBczXIJmy1asztlrU9MgHWCYiwEjRk5T7QASgklgj34Q91tlY7WHlcOPpHa5evZra4lGmidbV1+VFmroOgd6AjiYSdo9akx3z231N/GHm9k0cFLSPfWQqwivipeGZMeG8F/EH6EUvxC8Qq8G3XM+T8V46OxXstrU4z/DAPfMq+Ja6vsm7ClcIqVGxBXAqqgFOuRWsPgzp15DleW8WXy6gvWWdldoU4bDrC6UI7tkHjKRcTlMn20lEshY9CTJAy7JS5jv4876OinYCYhO2PVjsFqe1bRfcAqe4KBXZlDUpbY9tv4FevkWA6GMo6YiEpTCWXKHVvGRKoY1pjGIiTfd6+vEN5M9keLHuHS9/wBUUZNa7l3BKdvbXjZD+BL3q6QkB1zLLIiSxBFWuvISucpMgWv4UfOjttEZXFnygpWpNi6idkarsMTU01qiwNbJOo83sgelgkQ0zPKpdbiZudnZpwOGkz1MYi4itzkgWA/luTQPHPqwErOW0r4eY6y7xr9a23bpuivRcFojYmdT7bdMnquzIUrYeJQmFxWZCCVN/bpRa5MKQEaJi40+PeXGyi2jFtRh7g/V+j3pr/SHgGl9PU8p3vLtdx0GVNNseRxSLaVdT5QVTUm6jXrKfV10SaKJGqGJp+zUgpVWVEZ3HNL/AC9qa2oG/a2KacEus+5CvfCv32tEkkFiYJ7kVTI+Qr8V9+IDloD5OezHhs8pvTpFFx5GerWuNswa4LdfWbZ0huKs1i6af3NDAZkqhKHxr85Ez0Lh/wCaVBW6DObHOj2iXyPlGbBCRj4fzPi39pe6W7l0RVNfd6OweudHdtterJomzCJ1bw+rdknQMmuEC2TStjQwsjroiMtYrYsnJCosAjIMguRJjGHaxiPknqyAbrVu4ljYpSqIWAJqeLFlr8bNS1fgQYNo+BMtMbHpOmpYAOVsUrXY6SmYeqwr8jZZcGNkHYyJLyESlv4nXer73teYKgqDAOTsgCCmSPxk2Migo8FyQAiWSZCVmTY6LBbJlpSMixMlmM5KkpAIEfDhJLTavRrdypQrNuXrValUQPm+1bcqvWSHcD5Ne4wUse5gfIziO5iPmYjNyxq0gTHMBSx68mMMQAe5iI8iKYGO5mIjuY7mYj5nLqL9bD4rc597PkP6N/X8M9ndJ493930/LL7/AE+/P1z9/wCOecXM+UPxJ2OMJhrB356ETsOYlCTIqX7H6KkY8xLbqH20lBmW10d9LbzbbzaXG1YQ82hxOMLSlWKYQHS20JPWk1uEGomka2r0y9X5i0JKjEjhywz1cGJGyC4aiWfQMTb6wMSWMA8EwTORzDpCHSEIzy0x163JAm1KNlKOcxJXlqRVWIxo+FMkpAuIjA5iThHQApIguMtIQEjHOP1KVZBs6HpAAL7J+eMHGc188j49DTRO900OXYu1WJnaUYaFrW1gu7Gsa/f8xsUKbF27qSiGVaxg94rUUHMH1tLykPq6vnBtXI/UK8oYgIa4JHz7g0rmGNGY8lhMGcQMxOXEee9Pg/8Av/Sv8Zefr9354OtePTH7sf4d/d+/8fv54/Tp8H/rj/xX+Mv6Zxn/ABwdavwzj09P8Pffj8fX6Zzj7/ryngk+uu6oK2RVEslBlancZsU8yOrlwJiqjKuixnvYLefFskhFrBQlTbrbHz/y2THmCWQ8EOjPob+UE1bsE+pT98CqsmVTKu+cLP2ZhLLkPGkRslVIgxl0xL2W3HGZC8VQfCGMu5d+2xXWcOMpfcZuVyDQvBLEbvUOXZmqNc1bKkwHldc6vSFJA4hbNuxWsIqwElNhyHKV5moxGo3KZwJBarGJ+EBIvUUFLTNa4GYOYL3GLMA678zAxHshmIsR+2PevpB5bvI5Uuqey+2vW3V3iv6KHVzZuxJC57koFEr3cveguDBaxRaUZP2iOirjp2lpSseUOgQz4wlkadU2S4xaKTMR8iJryJ+Gdhplhnuj46G2R2ksMNJ3t15S2yy2nCGmm0JsuEttIRjCEtoxjCU4wnGMYxjHKaOrad2Rddf7H2nWay9KULUmawnYdiTIRIrFdcuZh4NZacFNPGkZB6WIi5LDLUSGe400CUQSlgdpTuMiR3UXsZKW3WNGE1hK/lRuWBItWsowmTrwWLfVRaiNeybPGmmTDEeivM1QrEqqaLKGjs5ElAEkKk4eWCC2+ZOXDf6xfw1enpjur46fT0zj/Hx179c4/d6/lL93/HhPkY8NaMY93up46k+mf8nfHXrH78/T/vLj/wCfv+/1x6/XlNc5o3aDVMuuwXK6Ompa8uwOubhJflHVsvQ9zlMnYjYX7JxNZmT1yCYuVcCNjI82NKZiZV5kxbUaatjIFh6bdnavsS4all9O2jGyqBTZPYFypkYuKnpuv1GGKbBl5Y8aCkZLGMxhbqGDgGVuyYrispeDR7qvdYy1F7ve0l+LPpjrGfM11vOidntngReRaHqHrvMg3OMl5VYOHIliW2BXmz9fVWtCOLGxNHLmi5QEVJLURAS8qP8AZS6qntn2e2j3O7G7c7P7nkWJLY+4raZaZ9QTbjEZGtrbZBh6/CjvOkPCwVbgw46AhBniCHh4uOEaeIfdSt5f8SfVLsFCwW8LNLa3kY+E633fGt91nEytdbTRrzmXOgvybLZ+2MkysgmUjTx1/k+zLMISI8Sp7AqfjZ154xjjjjjGOZt0t2Q3j11Nm5DSWyJ/XBtmaAFshFeyE2uwxcfg/DdencFCEpmKoZ9pEKmqlIpJrNhWgFyeiZJcXGKDwlxxjMoxW6toQZdDOibecEVrCs2Om0J1oaNz+TdYtstb52xxASFhLbdGlJa/W815RiCX23JwlA7rLTQrbH6R+8NsxesZXTEfepwXVc47JPzFGadYTAyJMvN0SxyBRQ2WMrcLemdZ0cxBeXPmRvsFkcV1kQySYMxVx/H8enGM2ZtfcfstdNlV/cc9tSVztOrVjFPgb7DRFYq9mAgsNGtIbxJViDh3iJNpMgYtmwF5fsLL73zLUoghtp1vH1m3ntm5ObZds11k5Ze9L8PtHbPxmI5pN1vwsrZpweyyTYwTDY5rMrcbKY21GoCDwuXIR8t8JDDbWJ+OMZsNEbs37akbHhhbWuwD7Mj4rF+jZ6Op8mBKZgY1Vcg5sUayxzwUHaoWGNMhIi2VpMXbY6JlZmPClmQZiWaL9XXS96alnHLHr0pddl3RUCPvtH1KRGJYZODlBMFRss/IRhTkdMRsZNxJBAbhEROxcXORbokrGgmD4D45qtjQbsVPqP8A4VY19hcLfS2OqLYKcH2kgeB30ocuSjuAOvMR1HflMdzA5PvgamChiTjxNTk+6Bx9u4MSOBKJ6+JHr4+evvsQJK9hAddSmog5qSY1rNTRNhlKYmbrioQywFuV116acYWYpSZT1qsE2ye24ggYYR0Md1oSQkmTOSPtfZOTmKJPmz5rk5raaZstNlm5CoDnxtoHNjD02ssoV1l2dtbr8HCIMs9hXKzp4cHBx5sgRHw8aMNrLxzWfy1XkzZNHi8sY+5aYyeMhJss7GvFTYWDOdlJG+/VEa1xxTLLVcYS8mLiByD6FPcl7FHyI2Mkvox7ljghTmTPudybVx7bCmfIw6ApkY6zYu5THYjYNkh7hd5+XtFnr8IFXIicmZ+vmnhwkegvAgCXHDs4fba+eMWp1/DpDzpDrr7zjy8r5805Ydy0fXc1QMzknFa4sxT2JussSkSVEyZh5tVl3XiQxnynfmHDKFVX8FpwhbX2Kwy2620SU0ThnjkyNAhSqdUqnHvoaLaratRGgFCqp0mG6odMZvtTUZVcxjazFpmUMYw1wJGUzeFRQgpcJqQpJAS1BVEQWSyklyofORWQEREEiPYEUyPUzMzkCq7SvdJqew6RV537KrW1YiKgL8C3FwxD89Cws6BZY+M+1TI4mYiw0zkVGyBTMMfHJkXARW5H5thhtpPNVHem1KLbdX3itWnI1m0wK2FrI+Qha7Pj1UVqanLGwyNE2CIlIc9I87ZJqUGzLx8gocszDrCm8jCYHxLxzosy8+5k9l3yaHt40vZpGSav90iti3JRqmSH7Dd4RFrRGWSRKcaUU5IjJvNszlaHkNELmynCW3nEsKZzTYe6naWzbWn95SO5rOJt20QwsBP7ArbELTrFJRgk9HWdtDxdRioRKC3Z6KAkzZRhtqUkX2VYkDCmnyG3dXeOMZm5HY7dKI/dEYi8loY7DnYkNzEJiq+mVvLqrGm3EDnTmInEzHxZ9mbGm5WFhD4yHlzwIt6UBLzFRuBcI8ccYxxzPnVnrlsTt32M0v1k1OFg7YG7th1zX9ey6264FGOThzbMhYpf4CVOswFWiUn2WwlpTnAMHEyBiv2GFccYzAf9HHJk3tVnhT/RU2uf5DetdRUN1w3palfnyqsCH/g3S27bGWt1ViYEHRhMVrzbsi86UL+zmMrmxHJCCQ/Hg2ulQbMNnjGOOOOMY4444xjjjjjGOOOOMY4444xjjjjjGOOOOMY44524+GDxVbE8sncCvaYicytb0nSEgXjshtAIfHuUrW7J+GvsaHLIZeBzsDYBLL1cowD7Za0EfatpJjjYCpT+GWMlP+xx+LU+KYt3lN29A4YxMx9l1F1Sj5MNWCFR6isxG2dwAqdTjDLZbohmqqwYwr4rwydmtEspFJiyCHJ1GrdY6/0drKh6h1bWY2la01fUICjUaqRDamo6v1asRg8RCxYuHFuPO4GBFZbWQS68WY975Jb75Tzrq3KwJT8RM/7RM/8AmU7iPmYj/nPw23qXWm/dX3nTe4abC7C1bs2syVSu9NsQ2SYmwV6YHywWGQlC2iB3k4UggGQCfFkos9kWSjCw5AQYlqoa87nhutPiI7LRkDC2HF3607wzZrL14t0hIR67kLFQJUbix6+vsWwpgnFmoyp6FGzZxQGK/cYmQjJkD7Pl1z9ZrrjiftMx+kzjv7RP69fvMZ0Z8cccplcccccYxxxxxjHHHHGMccccYxxxxxjHHHHGM2i6W9RNtd7+zupOqOj2INzY+3rC5DRBdllh4SvQkdGxps9ZrLNHPZU9mMrNaipaeNDjBpCckWI9YEFFSkuSFHkXH3i/8Z2gvFh1hrvXjSYWJWZIyLYdwbXkgWRbZuHZDgLQ0naprCHScxsQNhCo6n1IcsmPqkA2yEgiSlSJqdmHHGUj8/8ASf7RP983/NIyteWk59EIznCvw95eM5xn+f0Tn6Yx92c+ufr+znDjjmcEQIxEfp+8/OQzPc9z+ef/2Q==" alt="Aithentic Growth Systems logo" />
+        <div class="brand-text">
+          <strong>Aithentic Growth Systems</strong>
+          <span>AI Front Office</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#problem">Problem</a>
+        <a href="#systems">Systems</a>
+        <a href="#process">Process</a>
+        <a href="#niches">Niches</a>
+        <a class="nav-cta" href="#cta">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Built for home service businesses</div>
+          <h1><span class="gradient-text">Stop losing leads</span> before they book.</h1>
+          <p class="hero-copy">
+            Aithentic Growth Systems builds <strong>AI Front Office Systems</strong> that help home service businesses capture quote requests, answer customer questions, book more jobs, and reduce repetitive admin work.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#systems" class="btn btn-primary">See What We Build</a>
+            <a href="#process" class="btn btn-secondary">How It Works</a>
+          </div>
+
+          <div class="mini-proof">
+            <div class="mini-card">
+              <strong>24/7</strong>
+              <span>customer question handling</span>
+            </div>
+            <div class="mini-card">
+              <strong>Faster</strong>
+              <span>quote and booking intake</span>
+            </div>
+            <div class="mini-card">
+              <strong>Less</strong>
+              <span>manual follow-up work</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="screen">
+            <div class="screen-top">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <div class="status-pill">Lead captured</div>
+            </div>
+
+            <div class="assistant-card">
+              <div class="assistant-head">
+                <div class="avatar">AI</div>
+                <div>
+                  <h3>Front Office Assistant</h3>
+                  <p>Online and ready to help visitors take the next step.</p>
+                </div>
+              </div>
+
+              <div class="message bot">Hi, need help getting a quote or choosing the right cleaning service?</div>
+              <div class="message user">I need a move-out cleaning next week. Do you service my area?</div>
+              <div class="message bot">Absolutely. I can collect the details and send your request to the team.</div>
+
+              <div class="lead-capture">
+                <div class="field"><span>Name</span><span>Collected</span></div>
+                <div class="field"><span>Phone</span><span>Collected</span></div>
+                <div class="field"><span>Service Needed</span><span>Qualified</span></div>
+                <div class="field"><span>Owner Alert</span><span>Sent</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">The front-office gap</div>
+          <h2>Most service businesses do not lose jobs from bad work. They lose them from slow response.</h2>
+          <p>Customers visit the site, call after hours, ask a basic question, or need help choosing a service. If the path is confusing or no one responds fast enough, they move on.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="card"><div class="icon">01</div><h3>Missed calls</h3><p>Potential jobs slip away when calls are missed during jobs, after hours, or busy periods.</p></div>
+          <div class="card"><div class="icon">02</div><h3>Slow replies</h3><p>Customers expect quick answers before they request a quote or book service.</p></div>
+          <div class="card"><div class="icon">03</div><h3>Confusing websites</h3><p>Rough navigation and unclear service pages make customers hesitate instead of taking action.</p></div>
+          <div class="card"><div class="icon">04</div><h3>Weak follow-up</h3><p>Leads go cold when no one follows up quickly with the right next step.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section systems" id="systems">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">What we build</div>
+          <h2>A smarter front office without hiring another admin.</h2>
+          <p>We build simple, practical systems that help visitors become leads, leads become conversations, and conversations become booked jobs.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card system-card">
+            <div class="tag">Foundation</div>
+            <h3>Booking-focused website</h3>
+            <p>A clean website that helps customers understand your services and request a quote without hunting around.</p>
+            <ul>
+              <li><span class="check">✓</span> Service pages and clear calls-to-action</li>
+              <li><span class="check">✓</span> Quote request or booking intake</li>
+              <li><span class="check">✓</span> Mobile-friendly layout</li>
+              <li><span class="check">✓</span> Trust and review sections</li>
+            </ul>
+          </div>
+
+          <div class="card system-card featured">
+            <div class="tag">Core System</div>
+            <h3>AI website assistant</h3>
+            <p>A 24/7 assistant that answers common questions, captures customer details, and sends qualified leads to your business.</p>
+            <ul>
+              <li><span class="check">✓</span> FAQ and service guidance</li>
+              <li><span class="check">✓</span> Quote request collection</li>
+              <li><span class="check">✓</span> Booking intake questions</li>
+              <li><span class="check">✓</span> Owner or team notifications</li>
+            </ul>
+          </div>
+
+          <div class="card system-card">
+            <div class="tag">Premium</div>
+            <h3>AI phone receptionist</h3>
+            <p>An AI-powered phone layer designed to catch missed calls, collect details, and reduce lost opportunities.</p>
+            <ul>
+              <li><span class="check">✓</span> Missed-call support</li>
+              <li><span class="check">✓</span> Customer intake questions</li>
+              <li><span class="check">✓</span> Lead routing and summaries</li>
+              <li><span class="check">✓</span> Follow-up automation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="process">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Simple process</div>
+          <h2>From messy lead flow to a cleaner customer path.</h2>
+          <p>The goal is not to bury your business in technology. The goal is to make it easier for customers to take the next step.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="card step-card"><div class="step-number">Audit</div><h3>Find the leaks</h3><p>We review your site, booking path, customer questions, and missed-lead risks.</p></div>
+          <div class="card step-card"><div class="step-number">Build</div><h3>Create the system</h3><p>We build the website, AI assistant, intake flow, and lead notification setup.</p></div>
+          <div class="card step-card"><div class="step-number">Launch</div><h3>Go live cleanly</h3><p>We test the customer journey and make sure leads route to the right place.</p></div>
+          <div class="card step-card"><div class="step-number">Optimize</div><h3>Improve over time</h3><p>We review performance, update answers, and tighten the flow as your business grows.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="niches">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Built for service-first businesses</div>
+          <h2>Best fit for owner-led home service companies.</h2>
+          <p>Aithentic is designed for businesses where every quote request, call, and follow-up can turn into real revenue.</p>
+        </div>
+
+        <div class="niche-wrap">
+          <span class="niche primary">Residential Cleaning</span>
+          <span class="niche">Lawn Care</span>
+          <span class="niche">Landscaping</span>
+          <span class="niche">Pressure Washing</span>
+          <span class="niche">Window Cleaning</span>
+          <span class="niche">Pool Service</span>
+          <span class="niche">Mobile Detailing</span>
+          <span class="niche">HVAC</span>
+          <span class="niche">Plumbing</span>
+          <span class="niche">Roofing</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cta">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <div class="section-kicker">Ready when you are</div>
+            <h2>Build a front office that catches more opportunities.</h2>
+            <p>If you received a message from Aithentic, reply directly and we can send over a few quick ideas for how this could work for your business.</p>
+          </div>
+          <a href="#systems" class="btn btn-primary">Explore the System</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 Aithentic Growth Systems. All rights reserved.</span>
+      <span>AI Front Office Systems for Home Service Businesses</span>
+    </div>
+  </footer>
+</body>
 </html>
