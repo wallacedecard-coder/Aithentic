@@ -98,7 +98,7 @@ export default function AithenticGrowthSystemsLanding() {
               </div>
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <button onClick={scrollToAudit} className="rounded-full bg-emerald-400 px-7 py-4 text-base font-black text-[#071014] transition hover:-translate-y-1 hover:bg-emerald-300">
-                  Get a Free Store Audit
+                  Apply for Your Free AI Receptionist Demo
                 </button>
                 <a href="#system" className="rounded-full border border-white/15 bg-white/[0.04] px-7 py-4 text-center text-base font-bold text-white transition hover:-translate-y-1 hover:bg-white/[0.08]">
                   See What We Build
