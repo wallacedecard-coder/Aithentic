@@ -315,15 +315,15 @@ export default function AithenticGrowthSystemsLanding() {
 
             <div className="rounded-[2rem] border border-slate-200 bg-white p-3 shadow-xl sm:p-6">
               <iframe
-                src="https://tally.so/embed/oblMgX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                width="100%"
-                height="860"
-                frameBorder="0"
-                marginHeight="0"
-                marginWidth="0"
-                title="Request Your Free Store Audit"
-                className="rounded-3xl"
-              />
+  src="https://tally.so/r/oblMgX?alignLeft=1&hideTitle=1&transparentBackground=1"
+  width="100%"
+  height="820"
+  frameBorder="0"
+  marginHeight="0"
+  marginWidth="0"
+  title="Apply for Your Free AI Receptionist Demo"
+  className="rounded-3xl"
+/>
             </div>
           </div>
         </section>
